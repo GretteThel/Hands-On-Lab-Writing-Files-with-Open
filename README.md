@@ -13,10 +13,7 @@ We can open a file object using the method write() to save the text file to a li
 **# Write line to file**
 
 exmp2 = '/Example2.txt'
-
-
 with open(exmp2, 'w') as writefile:
-    
     writefile.write("This is line A")
 
 We can read the file to see if it worked:
