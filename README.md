@@ -247,7 +247,7 @@ with open('/Example2.txt', 'a+') as testwritefile:
 ![image](https://github.com/GretteThel/Hands-On-Lab-Writing-Files-with-Open/assets/117958967/49c4de6b-20e2-4ecf-b8e7-65f7e600e377)
 
 
-**THIS SHOUKD BE THE RESULT:**
+**THIS SHOULD BE THE RESULT:**
     
 Initial Location: 70
 
@@ -498,9 +498,9 @@ def cleanFiles(currentMem, exMem):
     
 
 
-# The code below is to help you view the files.
+**# The code below is to help you view the files.**
 
-# Do not modify this code for this exercise.
+**# Do not modify this code for this exercise.**
 
 memReg = '/members.txt'
 
@@ -593,6 +593,187 @@ Membership No  Date Joined  Active
 ![image](https://github.com/GretteThel/Hands-On-Lab-Writing-Files-with-Open/assets/117958967/6cff618c-f536-46f5-94a2-de1dd51d0db1)
 
 
+**The code cell below is to verify your solution. Please do not modify the code and run it to test your implementation of cleanFiles.**
+
+
+
+def testMsg(passed):
+    
+    if passed:
+ 
+       return 'Test Passed'
+  
+    else :
+    
+       return 'Test Failed'
+
+
+testWrite = "/testWrite.txt"
+
+testAppend = "/testAppend.txt" 
+
+passed = True
+
+
+genFiles(testWrite,testAppend)
+
+
+with open(testWrite,'r') as file:
+ 
+    ogWrite = file.readlines()
+
+
+with open(testAppend,'r') as file:
+  
+    ogAppend = file.readlines()
+
+
+try:
+  
+    cleanFiles(testWrite,testAppend)
+
+except:
+ 
+    print('Error')
+
+
+with open(testWrite,'r') as file:
+  
+    clWrite = file.readlines()
+
+
+with open(testAppend,'r') as file:
+
+    clAppend = file.readlines()
+        
+**# checking if total no of rows is same, including headers**
+
+
+if (len(ogWrite) + len(ogAppend) != len(clWrite) + len(clAppend)):
+   
+    print("The number of rows do not add up. Make sure your final files have the same header and format.")
+   
+    passed = False
+    
+
+for line in clWrite:
+
+    if  'no' in line:
+     
+        passed = False
+    
+        print("Inactive members in file")
+    
+        break
+ 
+    else:
+  
+        if line not in ogWrite:
+     
+            print("Data in file does not match original file")
+     
+            passed = False
+
+print ("{}".format(testMsg(passed)))
+
+![image](https://github.com/GretteThel/Hands-On-Lab-Writing-Files-with-Open/assets/117958967/6521a74e-cce0-49d1-ac0e-23a3297c98a0)
+
+
+**This should be the outcome:**
+    
+    Test Passed
+
+
+**# THIS IS THE SOLUTION:**
+    
+
+def cleanFiles(currentMem,exMem):
+  
+    with open(currentMem,'r+') as writeFile: 
+      
+        with open(exMem,'a+') as appendFile:
+         
+            #get the data
+          
+            writeFile.seek(0)
+          
+            members = writeFile.readlines()
+          
+            #remove header
+           
+            header = members[0]
+         
+            members.pop(0)
+                
+         
+            inactive = [member for member in members if ('no' in member)]
+         
+            '''
+          
+            The above is the same as 
+
+         
+            for member in members:
+        
+            if 'no' in member:
+         
+                inactive.append(member)
+         
+            '''
+          
+            #go to the beginning of the write file
+        
+            writeFile.seek(0) 
+         
+            writeFile.write(header)
+        
+            for member in members:
+         
+                if (member in inactive):
+         
+                    appendFile.write(member)
+         
+                else:
+         
+                    writeFile.write(member)      
+          
+            writeFile.truncate()
+                
+
+memReg = 'members.txt'
+
+exReg = 'inactive.txt'
+
+cleanFiles(memReg,exReg)
+
+
+**# code to help you see the files**
+
+
+headers = "Membership No  Date Joined  Active  \n"
+
+
+with open(memReg,'r') as readFile:
+
+    print("Active Members: \n\n")
+
+    print(readFile.read())
+
+    
+with open(exReg,'r') as readFile:
+
+    print("Inactive Members: \n\n")
+ 
+    print(readFile.read())
+    
+
+
+![image](https://github.com/GretteThel/Hands-On-Lab-Writing-Files-with-Open/assets/117958967/ff39395b-0c32-4313-90c4-f1cfd5a8114e)
+
+
+# The last exercise!
+
+Congratulations, you have completed this lesson and hands-on lab in Python. 
 
 
 
