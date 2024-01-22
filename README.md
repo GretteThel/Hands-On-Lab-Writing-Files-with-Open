@@ -13,7 +13,9 @@ We can open a file object using the method write() to save the text file to a li
 **# Write line to file**
 
 exmp2 = '/Example2.txt'
+
 with open(exmp2, 'w') as writefile:
+
     writefile.write("This is line A")
 
 We can read the file to see if it worked:
@@ -21,9 +23,11 @@ We can read the file to see if it worked:
 **# Read file**
 
 with open(exmp2, 'r') as testwritefile:
+   
     print(testwritefile.read())
 
-EXPECTED RESULT:
+**EXPECTED RESULT:**
+
 This is line A
 
 We can write multiple lines:
