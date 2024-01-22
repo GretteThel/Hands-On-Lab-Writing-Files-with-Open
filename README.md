@@ -14,6 +14,7 @@ We can open a file object using the method write() to save the text file to a li
 
 exmp2 = '/Example2.txt'
 
+
 with open(exmp2, 'w') as writefile:
     
     writefile.write("This is line A")
