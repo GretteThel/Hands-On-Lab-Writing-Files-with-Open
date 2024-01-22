@@ -46,8 +46,51 @@ EXPECTED RESULT:
 This is line A
 This is line B
 
+We write a list to a .txt file as follows:
+
+**# Sample list of text**
+
+Lines = ["This is line A\n", "This is line B\n", "This is line C\n"]
+Lines
+
+EXPECTED RESULT:    
+['This is line A\n', 'This is line B\n', 'This is line C\n']
+
+**# Write the strings in the list to text file**
+
+with open('/Example2.txt', 'w') as writefile:
+    for line in Lines:
+        print(line)
+        writefile.write(line)
+
+EXPECTED RESULT:    
+This is line A
+
+This is line B
+
+This is line C
+
+We can verify the file is written by reading it and printing out the values:
+**# Verify if writing to file is successfully executed**
+
+with open('/Example2.txt', 'r') as testwritefile:
+    print(testwritefile.read())
+
+THIS SHOULD BE THE RESULT:    
+This is line A
+This is line B
+This is line C
+
+However, note that setting the mode to w overwrites all the existing data in the file.
+with open('/Example2.txt', 'w') as writefile:
+    writefile.write("Overwrite\n")
+with open('/Example2.txt', 'r') as testwritefile:
+    print(testwritefile.read())
 
 
+THIS SHOULD BE THE RESULT:
+ Overwrite
 
 
-
+ 
+    
